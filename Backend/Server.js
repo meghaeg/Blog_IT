@@ -23,7 +23,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 mongoose
-  .connect("mongodb://localhost:27017/blogdb")
+  .connect("mongodb+srv://meghaeg27_db_user:Megha2711@cluster0.hz2o1hb.mongodb.net/blogit?retryWrites=true&w=majority&appName=Cluster0")
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.error(err));
 
