@@ -1,0 +1,135 @@
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+/* PAGE BACKGROUND */
+.create-page-wrapper {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f3f1, #ebe7e3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+/* CARD */
+.create-page-card {
+  width: 100%;
+  max-width: 800px;
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
+  animation: fadeUp 0.4s ease;
+}
+
+/* TITLE */
+.create-page-card h2 {
+  font-size: 28px;
+  margin-bottom: 25px;
+  color: #3b2f2f;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+
+/* FORM */
+.create-page-card form {
+  display: flex;
+  flex-direction: column;
+}
+
+/* INPUTS */
+.create-page-card input,
+.create-page-card textarea,
+.create-page-card select {
+  width: 100%;
+  padding: 14px 16px;
+  margin-bottom: 18px;
+  border-radius: 10px;
+  border: 1px solid #d3cec9;
+  font-size: 15px;
+  background: #fafafa;
+  transition: all 0.2s ease;
+}
+
+/* TEXTAREA */
+.create-page-card textarea {
+  min-height: 180px;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+/* FOCUS EFFECT */
+.create-page-card input:focus,
+.create-page-card textarea:focus,
+.create-page-card select:focus {
+  outline: none;
+  border-color: #3b2f2f;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(59, 47, 47, 0.1);
+}
+
+/* DROPDOWN */
+.create-page-card select {
+  cursor: pointer;
+}
+
+/* BUTTON */
+.create-page-card button {
+  margin-top: 10px;
+  align-self: flex-end;
+  padding: 12px 32px;
+  border-radius: 30px;
+  border: none;
+  background: #3b2f2f;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* BUTTON HOVER */
+.create-page-card button:hover {
+  background: #2a1f1f;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(59, 47, 47, 0.3);
+}
+
+/* BUTTON ACTIVE */
+.create-page-card button:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* ANIMATION */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .create-page-card {
+    padding: 25px;
+  }
+
+  .create-page-card h2 {
+    font-size: 22px;
+  }
+
+  .create-page-card button {
+    width: 100%;
+    align-self: stretch;
+  }
+}

@@ -1,0 +1,227 @@
+/* ================= PAGE BACKGROUND ================= */
+
+.chat-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)),
+    url("../assets/chatwallpaper.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* ================= JOIN UI ================= */
+
+.join-card {
+  width: 380px;
+  padding: 2.5rem;
+  border-radius: 20px;
+  background: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  text-align: center;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
+}
+
+.join-title {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.join-input {
+  width: 100%;
+  padding: 0.9rem 1.2rem;
+  margin-bottom: 1rem;
+  border-radius: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: transparent;
+  color: #fff;
+  outline: none;
+}
+
+.join-input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.join-btn {
+  width: 100%;
+  padding: 0.9rem;
+  border-radius: 25px;
+  border: none;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ================= CHAT UI ================= */
+
+.chat-box {
+  width: 420px;
+  height: 620px;
+  background: rgba(20, 20, 20, 0.92);
+  border-radius: 20px;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+}
+
+/* ================= HEADER ================= */
+
+.chat-header {
+  padding: 1rem;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.65);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-weight: 600;
+}
+
+/* ================= CHAT BODY ================= */
+
+.chat-body {
+  flex: 1;                     /* 🔑 critical fix */
+  padding: 1rem;
+  overflow-y: auto;
+
+  background: url("../assets/chatwallpaper.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* ================= MESSAGE BUBBLES ================= */
+
+.chat-bubble {
+  max-width: 75%;
+  padding: 0.7rem 1rem;
+  border-radius: 16px;
+  margin-bottom: 0.8rem;
+  font-size: 0.9rem;
+  word-wrap: break-word;
+}
+
+.sent {
+  margin-left: auto;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #fff;
+  border-bottom-right-radius: 4px;
+}
+
+.received {
+  background: rgba(255, 255, 255, 0.9);
+  color: #000;
+  border-bottom-left-radius: 4px;
+}
+
+.bubble-user {
+  font-size: 0.7rem;
+  opacity: 0.7;
+  margin-bottom: 2px;
+}
+
+.bubble-time {
+  display: block;
+  font-size: 0.65rem;
+  text-align: right;
+  opacity: 0.6;
+  margin-top: 4px;
+}
+
+/* ================= INPUT BAR ================= */
+
+.chat-input-bar {
+  display: flex;
+  align-items: center;
+  padding: 0.8rem;
+
+  background: rgba(0, 0, 0, 0.65);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.chat-input-bar input {
+  flex: 1;
+  padding: 0.8rem 1rem;
+  border-radius: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: transparent;
+  color: #fff;
+  outline: none;
+}
+
+.chat-input-bar input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.chat-input-bar button {
+  margin-left: 0.6rem;
+  padding: 0.8rem 1.4rem;
+  border-radius: 25px;
+  border: none;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ================= SCROLLBAR ================= */
+
+.chat-body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chat-body::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 10px;
+}
+
+.chat-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* ================= LEAVE BUTTON ================= */
+
+.chat-header {
+  position: relative; /* needed for absolute positioning */
+}
+
+.leave-btn {
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%);
+
+  padding: 0.4rem 0.9rem;
+  border-radius: 18px;
+  border: none;
+
+  background: linear-gradient(135deg, #ff5f6d, #ffc371);
+  color: #000;
+  font-size: 0.75rem;
+  font-weight: 600;
+
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.leave-btn:hover {
+  transform: translateY(-50%) scale(1.05);
+  box-shadow: 0 6px 14px rgba(255, 120, 120, 0.4);
+}
+
+.leave-btn:active {
+  transform: translateY(-50%) scale(0.95);
+}
