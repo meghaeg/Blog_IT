@@ -28,17 +28,24 @@ const register = async (req, res) => {
 };
 
 const login = async (req, res) => {
-    const { name, password } = req.body;
-    const user = await User.findOne({ name });
-    if (!user) return res.status(400).json({ message: "Invalid credentials" });
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.status(400).json({ message: "Invalid credentials" });
-    const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: "1h" });
-    res.cookie("token", token, {
-        httpOnly: true,
-        maxAge: 3600000,
-    });
-    res.send({ message: "Login successful" });
+  const { name, password } = req.body;
+
+  const user = await User.findOne({ name });
+  if (!user) return res.status(400).json({ message: "Invalid credentials" });
+
+  const isMatch = await bcrypt.compare(password, user.password);
+  if (!isMatch) return res.status(400).json({ message: "Invalid credentials" });
+
+  const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: "1h" });
+
+  res.cookie("token", token, {
+    httpOnly: true,
+    secure: true,
+    sameSite: "None",
+    maxAge: 3600000,
+  });
+
+  res.json({ message: "Login successful" });
 };
 
 const isLoggedIn = async (req, res) => {

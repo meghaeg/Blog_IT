@@ -1,24 +1,25 @@
-require("dotenv").config(); // ✅ added
+require("dotenv").config();
 
 const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
 const cors = require("cors");
 const express = require("express");
-const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
 const userRouter = require("./Routes/userRoutes");
 const blogRouter = require("./Routes/blogRoutes");
 const { Server } = require("socket.io");
 const http = require("http");
 
-const PORT = process.env.PORT || 5002; // ✅ updated
-const JWT_SECRET = process.env.JWT_SECRET || "mysecretkey"; // ✅ updated
+const PORT = process.env.PORT || 5002;
 
 const app = express();
 const server = http.createServer(app);
 
+// ✅ TRUST PROXY (IMPORTANT)
+app.set("trust proxy", 1);
+
+// ✅ CORS FIX
 app.use(cors({
-  origin: process.env.CLIENT_URL || "http://localhost:3000", // ✅ updated
+  origin: "https://splendid-elf-33bf32.netlify.app",
   credentials: true
 }));
 
@@ -26,12 +27,9 @@ app.use(express.json());
 app.use(cookieParser());
 
 mongoose
-  .connect(process.env.MONGO_URI) // ✅ updated
+  .connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.error(err));
-
-const User = require("./modals/userschema");
-const Blog = require("./modals/blogschema");
 
 app.use("/api/users", userRouter);
 app.use("/api/blogs", blogRouter);
@@ -40,9 +38,10 @@ app.get("/", (req, res) => {
   res.send("Server running");
 });
 
+// ✅ SOCKET FIX
 const io = new Server(server, {
   cors: {
-    origin: process.env.CLIENT_URL || "http://localhost:3000", // ✅ updated
+    origin: process.env.CLIENT_URL,
     methods: ["GET", "POST"],
     credentials: true
   }
@@ -54,7 +53,6 @@ io.on("connection", (socket) => {
   socket.on("join", ({ username, room }) => {
     socket.username = username;
     socket.room = room;
-
     socket.join(room);
 
     socket.to(room).emit("message", {
@@ -82,7 +80,6 @@ io.on("connection", (socket) => {
         time: new Date().toLocaleTimeString()
       });
     }
-    console.log("Chat user disconnected:", socket.id);
   });
 });
 
