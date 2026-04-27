@@ -194,7 +194,7 @@ cd client
 npm install
 ```
 
-
+Change MongoDB Connection String URI in Server.js in Backend
 
 ### 3️⃣ Run the Application
 
