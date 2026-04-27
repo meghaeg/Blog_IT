@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
+
 import { useNavigate } from "react-router-dom";
 import "./SavedBlogs.css";
 
@@ -14,29 +15,29 @@ const MyBlogs = () => {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    fetchMyBlogs();
-  }, []);
+const fetchMyBlogs = useCallback(async () => {
+  try {
+    const res = await fetch("https://blog-it-67ma.onrender.com/api/users/myBlogs", {
+      credentials: "include",
+    });
 
-  const fetchMyBlogs = async () => {
-    try {
-      const res = await fetch("https://blog-it-67ma.onrender.com/api/users/myBlogs", {
-        credentials: "include",
-      });
-
-      if (res.status === 401) {
-        navigate("/login");
-        return;
-      }
-
-      const data = await res.json();
-      setMyBlogs(data);
-    } catch (err) {
-      console.error("Failed to fetch my blogs", err);
-    } finally {
-      setLoading(false);
+    if (res.status === 401) {
+      navigate("/login");
+      return;
     }
-  };
+
+    const data = await res.json();
+    setMyBlogs(data);
+  } catch (err) {
+    console.error("Failed to fetch my blogs", err);
+  } finally {
+    setLoading(false);
+  }
+}, [navigate]); // ✅ dependency added
+
+useEffect(() => {
+  fetchMyBlogs();
+}, [fetchMyBlogs]); // ✅ now valid
 
   // ================= DELETE =================
   const handleDelete = async (id) => {
