@@ -1,3 +1,5 @@
+require("dotenv").config(); // ✅ added
+
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const cors = require("cors");
@@ -9,21 +11,22 @@ const blogRouter = require("./Routes/blogRoutes");
 const { Server } = require("socket.io");
 const http = require("http");
 
-const PORT = 5002;
-const JWT_SECRET = "mysecretkey";
+const PORT = process.env.PORT || 5002; // ✅ updated
+const JWT_SECRET = process.env.JWT_SECRET || "mysecretkey"; // ✅ updated
 
 const app = express();
 const server = http.createServer(app);
 
 app.use(cors({
-  origin: "http://localhost:3000",
+  origin: process.env.CLIENT_URL || "http://localhost:3000", // ✅ updated
   credentials: true
 }));
+
 app.use(express.json());
 app.use(cookieParser());
 
 mongoose
-  .connect("mongodb+srv://meghaeg27_db_user:Megha2711@cluster0.hz2o1hb.mongodb.net/blogit?retryWrites=true&w=majority&appName=Cluster0")
+  .connect(process.env.MONGO_URI) // ✅ updated
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.error(err));
 
@@ -39,7 +42,7 @@ app.get("/", (req, res) => {
 
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: process.env.CLIENT_URL || "http://localhost:3000", // ✅ updated
     methods: ["GET", "POST"],
     credentials: true
   }
